@@ -14,7 +14,6 @@ body {
 }
 
 a:link {
-  /* text-decoration: none; */
   color: #323EBE;
 }
 a:visited {
@@ -28,11 +27,11 @@ a:active {
 }
 
 header {
-  margin: .5rem 0 1.5rem;
+  margin: .5rem 0 1rem;
 }
 
 pre {
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 body code[class*="language-"],
@@ -45,10 +44,19 @@ body pre[class*="language-"] {
   margin: 0 auto;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    margin: 0 1rem;
+  }
+  html, body {
+    font-size: 18px;
+  }
+}
+
 .logo {
   color: inherit;
-  text-decoration: none;
   font-size: 2rem;
+  text-decoration: none;
 }
 
 .logo:visited {
@@ -57,6 +65,9 @@ body pre[class*="language-"] {
 
 .home-article {
   text-decoration: none;
+}
+.home-article:link {
+  color: inherit;
 }
 .home-article:visited {
   color: inherit;
@@ -75,7 +86,7 @@ body pre[class*="language-"] {
 }
 
 .post-title {
-  margin: 1.5rem 0 .3rem;
+  margin: 1rem 0 .2rem;
   font-size: 2.5rem;
   font-weight: 800;
 }
