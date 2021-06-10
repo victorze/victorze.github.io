@@ -1,0 +1,30 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" data-manual></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js"></script>
+<script>
+  if (window.isCMS) {
+    // In the CMS...
+    document.addEventListener('DOMContentLoaded', function () {
+      var regions = document.querySelectorAll('.cms-editable');
+      var i;
+
+      for (i = 0; i < regions.length; i++) {
+        // Run prism when each region is initialized
+        regions[i].addEventListener('ready', function () {
+          Prism.highlightAllUnder(regions[i]);
+        });
+
+        // Run prism when a code block is re-rendered
+        regions[i].addEventListener('render', function (event) {
+          if (event.target.classList.contains('cms-code')) {
+            Prism.highlightAllUnder(regions[i]);
+          }
+        });
+      }
+    });
+  } else {
+    // ...not in the CMS
+    Prism.highlightAll();
+  }
+</script>

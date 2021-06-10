@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+  Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.5;
+  font-size: 18px;
+  color: #111111;
+}
+
+.post-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.content {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+pre {
+  border-radius: 5px;
+}
+
+body code[class*="language-"],
+body pre[class*="language-"] {
+  font-size: 1rem;
+}

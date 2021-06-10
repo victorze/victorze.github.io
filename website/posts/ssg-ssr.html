@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <title>When to Use Static Generation v.s. Server-side Rendering</title>
+  </head>
+  <body>
+    <article class="content">
+      <header>
+        <h1 class="post-title">When to Use Static Generation v.s. Server-side Rendering</h1>
+        <span>2020-01-02</span>
+      </header>
+      <p>We recommend using <strong>Static Generation</strong> (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.</p>
+<p>You can use Static Generation for many types of pages, including:</p>
+<ul>
+<li>Marketing pages</li>
+<li>Blog posts</li>
+<li>E-commerce product listings</li>
+<li>Help and documentation</li>
+</ul>
+<p>You should ask yourself: "Can I pre-render this page <strong>ahead</strong> of a user's request?" If the answer is yes, then you should choose Static Generation.</p>
+<p>On the other hand, Static Generation is <strong>not</strong> a good idea if you cannot pre-render a page ahead of a user's request. Maybe your page shows frequently updated data, and the page content changes on every request.</p>
+<p>In that case, you can use <strong>Server-Side Rendering</strong>. It will be slower, but the pre-rendered page will always be up-to-date. Or you can skip pre-rendering and use client-side JavaScript to populate data.</p>
+<pre><code class="language-javascript">function foo() {
+  return 'foo'
+}
+</code></pre>
+<pre><code class="language-css">.foo {
+  color: red;
+}
+</code></pre>
+
+    </article>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" data-manual></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js"></script>
+<script>
+  if (window.isCMS) {
+    // In the CMS...
+    document.addEventListener('DOMContentLoaded', function () {
+      var regions = document.querySelectorAll('.cms-editable');
+      var i;
+
+      for (i = 0; i < regions.length; i++) {
+        // Run prism when each region is initialized
+        regions[i].addEventListener('ready', function () {
+          Prism.highlightAllUnder(regions[i]);
+        });
+
+        // Run prism when a code block is re-rendered
+        regions[i].addEventListener('render', function (event) {
+          if (event.target.classList.contains('cms-code')) {
+            Prism.highlightAllUnder(regions[i]);
+          }
+        });
+      }
+    });
+  } else {
+    // ...not in the CMS
+    Prism.highlightAll();
+  }
+</script>
+
+  </body>
+</html>
