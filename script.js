@@ -5,6 +5,8 @@ const remark = require("remark");
 const html = require("remark-html");
 const ejs = require('ejs');
 
+const postsDirectory = path.join(process.cwd(), 'posts')
+
 function renderPosts() {
   getAllPostIds().forEach(id => {
     getPostData(id)
@@ -12,7 +14,7 @@ function renderPosts() {
         const layoutPath = path.join(process.cwd(), "layouts", "post.html");
         ejs.renderFile(layoutPath, {...data, formatDate}, (err, str) => {
           if (err) return console.log(err);
-          const renderPath = path.join(process.cwd(), "website", "posts", `${id}.html`);
+          const renderPath = path.join(process.cwd(), "docs", "posts", `${id}.html`);
           fs.writeFileSync(renderPath, str);
         });
       });
@@ -25,7 +27,7 @@ function renderHome() {
   const layoutPath = path.join(process.cwd(), "layouts", "index.html");
   ejs.renderFile(layoutPath, {posts, formatDate}, (err, str) => {
     if (err) return console.log(err);
-    const renderPath = path.join(process.cwd(), "website", "index.html");
+    const renderPath = path.join(process.cwd(), "docs", "index.html");
     fs.writeFileSync(renderPath, str);
   });
 }
@@ -38,8 +40,6 @@ function formatDate(isoDate) {
   const nameMonth = monthNames[Number.parseInt(month) - 1];
   return `${Number.parseInt(day)} de ${nameMonth} de ${year}`;
 }
-
-const postsDirectory = path.join(process.cwd(), 'posts')
 
 function getSortedPostsData() {
   // Get file names under /posts
