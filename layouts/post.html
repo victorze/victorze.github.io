@@ -13,7 +13,7 @@
       <%- include("header.html"); %>
       <header>
         <h1 class="post-title"><%= title; %></h1>
-        <time class="post-date" datetime="<%= date; %>"><%= date; %></time>
+        <time class="post-date" datetime="<%= date; %>"><%= formatDate(date); %></time>
       </header>
       <%- contentHtml; %>
     </article>

@@ -5,14 +5,12 @@ const remark = require("remark");
 const html = require("remark-html");
 const ejs = require('ejs');
 
-const postsDirectory = path.join(process.cwd(), 'posts')
-
 function renderPosts() {
   getAllPostIds().forEach(id => {
     getPostData(id)
       .then(data => {
         const layoutPath = path.join(process.cwd(), "layouts", "post.html");
-        ejs.renderFile(layoutPath, data, (err, str) => {
+        ejs.renderFile(layoutPath, {...data, formatDate}, (err, str) => {
           if (err) return console.log(err);
           const renderPath = path.join(process.cwd(), "website", "posts", `${id}.html`);
           fs.writeFileSync(renderPath, str);
@@ -25,13 +23,23 @@ renderPosts();
 function renderHome() {
   const posts = getSortedPostsData();
   const layoutPath = path.join(process.cwd(), "layouts", "index.html");
-  ejs.renderFile(layoutPath, {posts}, (err, str) => {
+  ejs.renderFile(layoutPath, {posts, formatDate}, (err, str) => {
     if (err) return console.log(err);
     const renderPath = path.join(process.cwd(), "website", "index.html");
     fs.writeFileSync(renderPath, str);
   });
 }
 renderHome();
+
+function formatDate(isoDate) {
+  const [year, month, day] = isoDate.split("-");
+  const monthNames = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
+                      "agosto", "setiembre", "octubre", "noviembre", "diciembre"];
+  const nameMonth = monthNames[Number.parseInt(month) - 1];
+  return `${Number.parseInt(day)} de ${nameMonth} de ${year}`;
+}
+
+const postsDirectory = path.join(process.cwd(), 'posts')
 
 function getSortedPostsData() {
   // Get file names under /posts
@@ -58,13 +66,11 @@ function getSortedPostsData() {
   return allPostsData.sort((a, b) => (a.date < b.date) ? 1 : -1)
           .filter(post => post.published)
 }
-console.log(getSortedPostsData());
 
 function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory)
   return fileNames.map(fileName => fileName.replace(/\.md$/, ''))
 }
-// console.log(getAllPostIds());
 
 async function getPostData(id) {
   const fullPath = path.join(postsDirectory, `${id}.md`)

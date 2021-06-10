@@ -37,7 +37,7 @@ pre {
 
 body code[class*="language-"],
 body pre[class*="language-"] {
-  font-size: 1rem;
+  font-size: .9rem;
 }
 
 .container {

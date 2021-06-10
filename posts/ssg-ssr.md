@@ -25,6 +25,20 @@ function foo() {
 }
 ```
 
+```bash
+$ npm i remark
+npm WARN victorze.dev@1.0.0 No description
+npm WARN victorze.dev@1.0.0 No repository field.
+
++ remark@13.0.0
+updated 1 package and audited 78 packages in 3.4s
+
+22 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
 ```css
 .foo {
   color: red;
