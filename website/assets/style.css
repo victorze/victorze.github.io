@@ -9,18 +9,26 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
   Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.5;
-  font-size: 18px;
+  font-size: 20px;
   color: #111111;
 }
 
-.post-title {
-  font-size: 2.5rem;
-  font-weight: 800;
+a:link {
+  /* text-decoration: none; */
+  color: #323EBE;
+}
+a:visited {
+  color: #323EBE;
+}
+a:hover {
+  color: #2b35a1;
+}
+a:active {
+  color: #323EBE;
 }
 
-.content {
-  max-width: 40rem;
-  margin: 0 auto;
+header {
+  margin: .5rem 0 1.5rem;
 }
 
 pre {
@@ -30,4 +38,48 @@ pre {
 body code[class*="language-"],
 body pre[class*="language-"] {
   font-size: 1rem;
+}
+
+.container {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.logo {
+  color: inherit;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.logo:visited {
+  color: inherit;
+}
+
+.home-article {
+  text-decoration: none;
+}
+.home-article:visited {
+  color: inherit;
+}
+.home-article:hover {
+  color: #323EBE;
+}
+
+.home-article h2 {
+  font-size: 1.4rem;
+  margin: 1rem 0 0;
+}
+
+.home-article time {
+  font-size: .7rem;
+}
+
+.post-title {
+  margin: 1.5rem 0 .3rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.post-date {
+  font-size: .9rem;
 }

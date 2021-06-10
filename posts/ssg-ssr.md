@@ -31,3 +31,22 @@ function foo() {
 }
 ```
 
+## Instrucciones
+
+Para probar la aplicación debe usar el usuario `qwerty` y la contraseña `secret`.
+Puede crear más usuarios y cuentas en los métodos `init` de las clases localizadas
+en el paquete `repositories`.
+
+## Artículos relacionados
+
+* [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html),
+  Robert C. Martin
+  
+* [A Little Architecture](https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html),
+  Robert C. Martin
+  
+* [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html),
+  Martin Fowler
+
+* [Inversion of Control](https://martinfowler.com/bliki/InversionOfControl.html),
+  Martin Fowler

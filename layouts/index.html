@@ -1,0 +1,21 @@
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/style.css">
+    <title>victorze</title>
+  </head>
+  <body>
+    <article class="container">
+      <%- include("header.html"); %>
+
+      <% posts.forEach(post => { %>
+      <a href="<%= `/posts/${post.id}.html` %>" class="home-article">
+          <h2><%= post.title %></h2>
+          <time datetime="<%= post.date; %>"><%= post.date; %></time>
+        </a>
+      <% }); %>
+    </article>
+  </body>
+</html>

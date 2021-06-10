@@ -14,13 +14,24 @@ function renderPosts() {
         const layoutPath = path.join(process.cwd(), "layouts", "post.html");
         ejs.renderFile(layoutPath, data, (err, str) => {
           if (err) return console.log(err);
-          const renderPath = path.join(process.cwd(), "website", "posts", `${id}.html`)
+          const renderPath = path.join(process.cwd(), "website", "posts", `${id}.html`);
           fs.writeFileSync(renderPath, str);
         });
       });
   });
 }
 renderPosts();
+
+function renderHome() {
+  const posts = getSortedPostsData();
+  const layoutPath = path.join(process.cwd(), "layouts", "index.html");
+  ejs.renderFile(layoutPath, {posts}, (err, str) => {
+    if (err) return console.log(err);
+    const renderPath = path.join(process.cwd(), "website", "index.html");
+    fs.writeFileSync(renderPath, str);
+  });
+}
+renderHome();
 
 function getSortedPostsData() {
   // Get file names under /posts
@@ -47,7 +58,7 @@ function getSortedPostsData() {
   return allPostsData.sort((a, b) => (a.date < b.date) ? 1 : -1)
           .filter(post => post.published)
 }
-// console.log(getSortedPostsData());
+console.log(getSortedPostsData());
 
 function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory)

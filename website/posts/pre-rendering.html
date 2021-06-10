@@ -2,17 +2,21 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-tomorrow.min.css">
     <link rel="stylesheet" href="../assets/style.css">
     <title>Two Forms of Pre-rendering</title>
   </head>
   <body>
-    <article class="content">
+    <article class="container">
+      <header>
+  <a href="/" class="logo">victorze</a>
+</header>
+
       <header>
         <h1 class="post-title">Two Forms of Pre-rendering</h1>
-        <span>2020-01-01</span>
+        <time class="post-date" datetime="2020-01-01">2020-01-01</time>
       </header>
       <p>Next.js has two forms of pre-rendering: <strong>Static Generation</strong> and <strong>Server-side Rendering</strong>. The difference is in <strong>when</strong> it generates the HTML for a page.</p>
 <ul>
@@ -22,36 +26,30 @@
 <p>Importantly, Next.js lets you <strong>choose</strong> which pre-rendering form to use for each page. You can create a "hybrid" Next.js app by using Static Generation for most pages and using Server-side Rendering for others.</p>
 
     </article>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" data-manual></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-markup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-css.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js"></script>
-<script>
-  if (window.isCMS) {
-    // In the CMS...
-    document.addEventListener('DOMContentLoaded', function () {
-      var regions = document.querySelectorAll('.cms-editable');
-      var i;
-
-      for (i = 0; i < regions.length; i++) {
-        // Run prism when each region is initialized
-        regions[i].addEventListener('ready', function () {
-          Prism.highlightAllUnder(regions[i]);
-        });
-
-        // Run prism when a code block is re-rendered
-        regions[i].addEventListener('render', function (event) {
-          if (event.target.classList.contains('cms-code')) {
-            Prism.highlightAllUnder(regions[i]);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js"></script>
+    <script>
+      if (window.isCMS) {
+        document.addEventListener('DOMContentLoaded', function () {
+          var regions = document.querySelectorAll('.cms-editable');
+          var i;
+          for (i = 0; i < regions.length; i++) {
+            regions[i].addEventListener('ready', function () {
+              Prism.highlightAllUnder(regions[i]);
+            });
+            regions[i].addEventListener('render', function (event) {
+              if (event.target.classList.contains('cms-code')) {
+                Prism.highlightAllUnder(regions[i]);
+              }
+            });
           }
         });
+      } else {
+        Prism.highlightAll();
       }
-    });
-  } else {
-    // ...not in the CMS
-    Prism.highlightAll();
-  }
-</script>
-
+    </script>
   </body>
 </html>
