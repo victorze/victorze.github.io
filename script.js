@@ -11,19 +11,22 @@ function renderPosts() {
   getAllPostIds().forEach(id => {
     getPostData(id)
       .then(data => {
-        const layoutPath = path.join(process.cwd(), "layouts", "post.html");
-        ejs.renderFile(layoutPath, {...data, formatDate}, (err, str) => {
-          if (err) return console.log(err);
-          const renderPath = path.join(process.cwd(), "docs", "posts", `${id}.html`);
-          fs.writeFileSync(renderPath, str);
-        });
+        if (data.published) {
+          const layoutPath = path.join(process.cwd(), "layouts", "post.html");
+          ejs.renderFile(layoutPath, { ...data, formatDate }, (err, str) => {
+            if (err) return console.log(err);
+            const renderPath = path.join(process.cwd(), "docs", "posts", `${id}.html`);
+            fs.writeFileSync(renderPath, str);
+          });
+        }
       });
   });
 }
 renderPosts();
 
 function renderHome() {
-  const posts = getSortedPostsData();
+  let posts = getSortedPostsData();
+  posts = posts.filter(post => post.published);
   const layoutPath = path.join(process.cwd(), "layouts", "index.html");
   ejs.renderFile(layoutPath, {posts, formatDate}, (err, str) => {
     if (err) return console.log(err);
