@@ -41,7 +41,7 @@ body pre[class*="language-"] {
 
 .container {
   max-width: 40rem;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
 }
 
 @media (max-width: 1024px) {
