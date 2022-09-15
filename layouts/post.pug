@@ -1,0 +1,22 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset='UTF-8')
+    link(rel='icon' href='/favicon.ico')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-tomorrow.min.css')
+    link(rel='stylesheet' href='../assets/style.css')
+    title= title
+  body
+    article.container
+      include header.pug
+      header
+        h1.post-title= title
+        time.post-date(datetime=date)= formatDate(date)
+      div!= contentHtml
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js' data-manual)
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-markup.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-css.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js')
+    script(src='../assets/script.js')

@@ -10,15 +10,12 @@
   </head>
   <body>
     <article class="container">
-      <header>
-  <a href="/" class="logo">victorze</a>
-</header>
-
+      <header><a class="logo" href="/">victorze</a></header>
       <header>
         <h1 class="post-title">When to Use Static Generation v.s. Server-side Rendering</h1>
         <time class="post-date" datetime="2020-01-02">2 de enero de 2020</time>
       </header>
-      <p>We recommend using <strong>Static Generation</strong> (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.</p>
+      <div><p>We recommend using <strong>Static Generation</strong> (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.</p>
 <p>You can use Static Generation for many types of pages, including:</p>
 <ul>
 <li>Marketing pages</li>
@@ -26,7 +23,7 @@
 <li>E-commerce product listings</li>
 <li>Help and documentation</li>
 </ul>
-<p>You should ask yourself: "Can I pre-render this page <strong>ahead</strong> of a user's request?" If the answer is yes, then you should choose Static Generation.</p>
+<p>You should ask yourself: &quot;Can I pre-render this page <strong>ahead</strong> of a user's request?&quot; If the answer is yes, then you should choose Static Generation.</p>
 <p>On the other hand, Static Generation is <strong>not</strong> a good idea if you cannot pre-render a page ahead of a user's request. Maybe your page shows frequently updated data, and the page content changes on every request.</p>
 <p>In that case, you can use <strong>Server-Side Rendering</strong>. It will be slower, but the pre-rendered page will always be up-to-date. Or you can skip pre-rendering and use client-side JavaScript to populate data.</p>
 <pre><code class="language-javascript">function foo() {
@@ -55,49 +52,21 @@ Puede crear más usuarios y cuentas en los métodos <code>init</code> de las cla
 en el paquete <code>repositories</code>.</p>
 <h2>Artículos relacionados</h2>
 <ul>
-<li>
-<p><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture</a>,
-Robert C. Martin</p>
-</li>
-<li>
-<p><a href="https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html">A Little Architecture</a>,
-Robert C. Martin</p>
-</li>
-<li>
-<p><a href="https://martinfowler.com/articles/injection.html">Inversion of Control Containers and the Dependency Injection pattern</a>,
-Martin Fowler</p>
-</li>
-<li>
-<p><a href="https://martinfowler.com/bliki/InversionOfControl.html">Inversion of Control</a>,
-Martin Fowler</p>
-</li>
+<li><p><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture</a>,
+Robert C. Martin</p></li>
+<li><p><a href="https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html">A Little Architecture</a>,
+Robert C. Martin</p></li>
+<li><p><a href="https://martinfowler.com/articles/injection.html">Inversion of Control Containers and the Dependency Injection pattern</a>,
+Martin Fowler</p></li>
+<li><p><a href="https://martinfowler.com/bliki/InversionOfControl.html">Inversion of Control</a>,
+Martin Fowler</p></li>
 </ul>
-
+</div>
     </article>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" data-manual></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js"></script>
-    <script>
-      if (window.isCMS) {
-        document.addEventListener('DOMContentLoaded', function () {
-          var regions = document.querySelectorAll('.cms-editable');
-          var i;
-          for (i = 0; i < regions.length; i++) {
-            regions[i].addEventListener('ready', function () {
-              Prism.highlightAllUnder(regions[i]);
-            });
-            regions[i].addEventListener('render', function (event) {
-              if (event.target.classList.contains('cms-code')) {
-                Prism.highlightAllUnder(regions[i]);
-              }
-            });
-          }
-        });
-      } else {
-        Prism.highlightAll();
-      }
-    </script>
+    <script src="../assets/script.js"></script>
   </body>
 </html>

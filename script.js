@@ -1,9 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
-const remark = require("remark");
-const html = require("remark-html");
-const ejs = require('ejs');
+const pug = require('pug');
+const { Remarkable } = require('remarkable');
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
@@ -12,12 +11,10 @@ function renderPosts() {
     getPostData(id)
       .then(data => {
         if (data.published) {
-          const layoutPath = path.join(process.cwd(), "layouts", "post.html");
-          ejs.renderFile(layoutPath, { ...data, formatDate }, (err, str) => {
-            if (err) return console.log(err);
-            const renderPath = path.join(process.cwd(), "docs", "posts", `${id}.html`);
-            fs.writeFileSync(renderPath, str);
-          });
+          const layoutPath = path.join(process.cwd(), "layouts", "post.pug");
+          const str = pug.renderFile(layoutPath, {...data, formatDate})
+          const renderPath = path.join(process.cwd(), "docs", "posts", `${id}.html`);
+          fs.writeFileSync(renderPath, str);
         }
       });
   });
@@ -27,12 +24,10 @@ renderPosts();
 function renderHome() {
   let posts = getSortedPostsData();
   posts = posts.filter(post => post.published);
-  const layoutPath = path.join(process.cwd(), "layouts", "index.html");
-  ejs.renderFile(layoutPath, {posts, formatDate}, (err, str) => {
-    if (err) return console.log(err);
-    const renderPath = path.join(process.cwd(), "docs", "index.html");
-    fs.writeFileSync(renderPath, str);
-  });
+  const layoutPath = path.join(process.cwd(), "layouts", "index.pug");
+  const str = pug.renderFile(layoutPath, {posts, formatDate})
+  const renderPath = path.join(process.cwd(), "docs", "index.html");
+  fs.writeFileSync(renderPath, str);
 }
 renderHome();
 
@@ -67,13 +62,11 @@ function getAllPostIds() {
 }
 
 async function getPostData(id) {
+  const md = new Remarkable();
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+  const contentHtml = md.render(matterResult.content)
   return {
     id,
     contentHtml,

@@ -4,7 +4,7 @@
   "description": "Personal Website",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node script.js"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +12,7 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "gray-matter": "^4.0.3",
-    "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "pug": "^3.0.2",
+    "remarkable": "^2.0.1"
   }
 }
