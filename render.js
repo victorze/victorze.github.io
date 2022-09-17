@@ -13,9 +13,9 @@ function renderPost(id) {
   if (!post) return
   if (post.published) {
     const layoutPath = path.join(process.cwd(), 'layouts', 'post.pug')
-    const str = pug.renderFile(layoutPath, { ...post, formatDate })
+    const html = pug.renderFile(layoutPath, { ...post, formatDate })
     const renderPath = path.join(process.cwd(), 'docs', 'posts', `${id}.html`)
-    fs.writeFileSync(renderPath, str)
+    fs.writeFileSync(renderPath, html)
   }
   renderHome()
 }
@@ -24,9 +24,9 @@ function renderHome() {
   let posts = getSortedPostsData()
   posts = posts.filter((post) => post.published)
   const layoutPath = path.join(process.cwd(), 'layouts', 'index.pug')
-  const str = pug.renderFile(layoutPath, { posts, formatDate })
+  const html = pug.renderFile(layoutPath, { posts, formatDate })
   const renderPath = path.join(process.cwd(), 'docs', 'index.html')
-  fs.writeFileSync(renderPath, str)
+  fs.writeFileSync(renderPath, html)
 }
 
 function formatDate(isoDate) {
