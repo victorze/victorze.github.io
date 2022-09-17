@@ -11,20 +11,20 @@ renderPosts()
 
 function renderHome() {
   let posts = getSortedPostsData()
-  posts = posts.filter(post => post.published)
+  posts = posts.filter((post) => post.published)
   const layoutPath = path.join(process.cwd(), 'layouts', 'index.pug')
-  const str = pug.renderFile(layoutPath, {posts, formatDate})
+  const str = pug.renderFile(layoutPath, { posts, formatDate })
   const renderPath = path.join(process.cwd(), 'docs', 'index.html')
   fs.writeFileSync(renderPath, str)
 }
 
 function renderPosts() {
-  getAllPostIds().forEach(id => {
+  getAllPostIds().forEach((id) => {
     getPostData(id)
-      .then(data => {
+      .then((data) => {
         if (data.published) {
           const layoutPath = path.join(process.cwd(), 'layouts', 'post.pug')
-          const str = pug.renderFile(layoutPath, {...data, formatDate})
+          const str = pug.renderFile(layoutPath, { ...data, formatDate })
           const renderPath = path.join(process.cwd(), 'docs', 'posts', `${id}.html`)
           fs.writeFileSync(renderPath, str)
         }
@@ -35,14 +35,14 @@ function renderPosts() {
 function formatDate(isoDate) {
   const [year, month, day] = isoDate.split('-')
   const monthNames = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
-                      'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre']
+    'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre']
   const monthName = monthNames[Number.parseInt(month) - 1]
   return `${Number.parseInt(day)} de ${monthName} de ${year}`
 }
 
 function getSortedPostsData() {
   const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames.map(fileName => {
+  const allPostsData = fileNames.map((fileName) => {
     const id = fileName.replace(/\.md$/, '')
     const fullPath = path.join(postsDirectory, fileName)
     const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -55,12 +55,12 @@ function getSortedPostsData() {
 
   return allPostsData
     .sort((a, b) => (a.date < b.date) ? 1 : -1)
-    .filter(post => post.published)
+    .filter((post) => post.published)
 }
 
 function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory)
-  return fileNames.map(fileName => fileName.replace(/\.md$/, ''))
+  return fileNames.map((fileName) => fileName.replace(/\.md$/, ''))
 }
 
 async function getPostData(id) {
