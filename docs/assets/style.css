@@ -13,6 +13,11 @@ body {
   color: #111111;
 }
 
+img {
+  display: block;
+  margin: 0 auto;
+}
+
 a:link {
   color: #323EBE;
 }

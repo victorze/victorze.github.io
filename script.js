@@ -35,7 +35,7 @@ function renderPosts() {
 function formatDate(isoDate) {
   const [year, month, day] = isoDate.split('-')
   const monthNames = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
-    'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre']
+                      'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre']
   const monthName = monthNames[Number.parseInt(month) - 1]
   return `${Number.parseInt(day)} de ${monthName} de ${year}`
 }
