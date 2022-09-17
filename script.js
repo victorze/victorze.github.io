@@ -9,6 +9,15 @@ const postsDirectory = path.join(process.cwd(), 'posts')
 renderHome()
 renderPosts()
 
+function renderHome() {
+  let posts = getSortedPostsData()
+  posts = posts.filter(post => post.published)
+  const layoutPath = path.join(process.cwd(), 'layouts', 'index.pug')
+  const str = pug.renderFile(layoutPath, {posts, formatDate})
+  const renderPath = path.join(process.cwd(), 'docs', 'index.html')
+  fs.writeFileSync(renderPath, str)
+}
+
 function renderPosts() {
   getAllPostIds().forEach(id => {
     getPostData(id)
@@ -21,15 +30,6 @@ function renderPosts() {
         }
       })
   })
-}
-
-function renderHome() {
-  let posts = getSortedPostsData()
-  posts = posts.filter(post => post.published)
-  const layoutPath = path.join(process.cwd(), 'layouts', 'index.pug')
-  const str = pug.renderFile(layoutPath, {posts, formatDate})
-  const renderPath = path.join(process.cwd(), 'docs', 'index.html')
-  fs.writeFileSync(renderPath, str)
 }
 
 function formatDate(isoDate) {
@@ -53,8 +53,9 @@ function getSortedPostsData() {
     }
   })
 
-  return allPostsData.sort((a, b) => (a.date < b.date) ? 1 : -1)
-          .filter(post => post.published)
+  return allPostsData
+    .sort((a, b) => (a.date < b.date) ? 1 : -1)
+    .filter(post => post.published)
 }
 
 function getAllPostIds() {
