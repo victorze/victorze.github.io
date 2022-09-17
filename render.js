@@ -6,8 +6,19 @@ const { Remarkable } = require('remarkable')
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-renderHome()
-renderPosts()
+renderPost(process.argv[2])
+
+function renderPost(id) {
+  const post = getPostData(id)
+  if (!post) return
+  if (post.published) {
+    const layoutPath = path.join(process.cwd(), 'layouts', 'post.pug')
+    const str = pug.renderFile(layoutPath, { ...post, formatDate })
+    const renderPath = path.join(process.cwd(), 'docs', 'posts', `${id}.html`)
+    fs.writeFileSync(renderPath, str)
+  }
+  renderHome()
+}
 
 function renderHome() {
   let posts = getSortedPostsData()
@@ -16,20 +27,6 @@ function renderHome() {
   const str = pug.renderFile(layoutPath, { posts, formatDate })
   const renderPath = path.join(process.cwd(), 'docs', 'index.html')
   fs.writeFileSync(renderPath, str)
-}
-
-function renderPosts() {
-  getAllPostIds().forEach((id) => {
-    getPostData(id)
-      .then((data) => {
-        if (data.published) {
-          const layoutPath = path.join(process.cwd(), 'layouts', 'post.pug')
-          const str = pug.renderFile(layoutPath, { ...data, formatDate })
-          const renderPath = path.join(process.cwd(), 'docs', 'posts', `${id}.html`)
-          fs.writeFileSync(renderPath, str)
-        }
-      })
-  })
 }
 
 function formatDate(isoDate) {
@@ -52,21 +49,21 @@ function getSortedPostsData() {
       ...matterResult.data
     }
   })
-
   return allPostsData
     .sort((a, b) => (a.date < b.date) ? 1 : -1)
     .filter((post) => post.published)
 }
 
-function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory)
-  return fileNames.map((fileName) => fileName.replace(/\.md$/, ''))
-}
-
-async function getPostData(id) {
+function getPostData(id) {
   const md = new Remarkable()
   const fullPath = path.join(postsDirectory, `${id}.md`)
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  let fileContents
+  try {
+    fileContents = fs.readFileSync(fullPath, 'utf8')
+  } catch (err) {
+    console.log(`El archivo ./posts/${id}.md no existe`)
+    return
+  }
   const matterResult = matter(fileContents)
   const contentHtml = md.render(matterResult.content)
   return {
