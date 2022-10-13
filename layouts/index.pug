@@ -7,8 +7,8 @@ html(lang="es")
     link(rel='stylesheet' href='assets/style.css')
     title victorze
   body
-    article.container
-      include header.pug
+    include header.pug
+    main.container
       each post in posts
         a.home-article(href='/posts/' + post.id + '.html')
           h2= post.title
